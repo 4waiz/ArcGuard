@@ -1,0 +1,30 @@
+{
+  "name": "arcguard",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @arcguard/web dev",
+    "demo": "pnpm --filter @arcguard/web dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "verify": "pnpm lint && pnpm typecheck && pnpm build",
+    "analyze": "pnpm exec tsx scripts/analyze-scenario.ts",
+    "report:scenario": "pnpm exec tsx scripts/generate-report.ts",
+    "arcguard:analyze:flow": "pnpm exec tsx scripts/arcguard-flow.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.5.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.1",
+    "globals": "^17.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.1"
+  }
+}
