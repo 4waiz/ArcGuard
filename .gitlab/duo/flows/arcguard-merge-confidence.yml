@@ -1,0 +1,67 @@
+version: "v1"
+name: "ArcGuard Merge Confidence"
+description: "Analyze a merge request and post an ArcGuard Merge Confidence Report back into the MR."
+environment: ambient
+components:
+  - name: "arcguard_merge_confidence"
+    type: AgentComponent
+    prompt_id: "arcguard_merge_confidence_prompt"
+    inputs:
+      - from: "context:goal"
+        as: "goal"
+      - from: "context:project_id"
+        as: "project_id"
+      - from: "context:merge_request_id"
+        as: "merge_request_iid"
+    toolset:
+      - "get_merge_request"
+      - "list_merge_request_diffs"
+      - "build_review_merge_request_context"
+      - "list_all_merge_request_notes"
+      - "get_pipeline_errors"
+      - "run_tests"
+      - "create_merge_request_note"
+    ui_log_events:
+      - "on_agent_final_answer"
+      - "on_tool_execution_success"
+      - "on_tool_execution_failed"
+prompts:
+  - prompt_id: "arcguard_merge_confidence_prompt"
+    name: "ArcGuard Merge Confidence Reporter"
+    unit_primitives: []
+    prompt_template:
+      system: |
+        You are ArcGuard, a GitLab-native merge confidence workflow.
+
+        Your job is to analyze the current merge request and post a Merge Confidence Report to the merge request discussion.
+
+        Operating rules:
+        - Never invent a score, verdict, or evidence.
+        - Always run the shared repository analysis engine by calling run_tests with: pnpm arcguard:analyze:flow
+        - If run_tests fails, do not fabricate a report. Post a brief failure note instead.
+        - Prefer the markdown report between ARC_GUARD_REPORT_MARKDOWN_START and ARC_GUARD_REPORT_MARKDOWN_END.
+        - Post the markdown report with create_merge_request_note using project_id={{project_id}} and merge_request_iid={{merge_request_iid}}.
+        - The MR note should help a reviewer act. If the script output does not already include next steps, append a short "Reviewer next actions" section based on the computed findings.
+        - Avoid duplicate spam by checking recent MR notes for a prior ArcGuard report in the same session before posting again.
+        - The report must preserve ArcGuard coverage for architecture drift, review minimap, intent contracts, flake witness capsule, rollback reality check, sustainability / CI waste, and the final merge confidence verdict.
+
+        Recommended execution sequence:
+        1. Call get_merge_request to confirm the merge request details.
+        2. Call list_all_merge_request_notes to check whether an ArcGuard report was already posted recently.
+        3. Call build_review_merge_request_context or list_merge_request_diffs if you need extra MR context.
+        4. Call run_tests with pnpm arcguard:analyze:flow.
+        5. Extract the markdown report from stdout.
+        6. Call create_merge_request_note with the markdown report.
+        6. In your final answer, state the verdict, score, and whether the MR note was posted.
+      user: |
+        Goal: {{goal}}
+        Merge request IID: {{merge_request_iid}}
+        Project ID: {{project_id}}
+      placeholder: history
+    params:
+      timeout: 300
+routers:
+  - from: "arcguard_merge_confidence"
+    to: "end"
+flow:
+  entry_point: "arcguard_merge_confidence"

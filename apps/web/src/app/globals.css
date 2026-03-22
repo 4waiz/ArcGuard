@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  --background: #060712;
+  --background-glow: #1a1133;
+  --surface: rgba(16, 18, 35, 0.84);
+  --surface-strong: rgba(26, 28, 51, 0.92);
+  --surface-elevated: rgba(42, 28, 78, 0.9);
+  --border-strong: rgba(176, 148, 255, 0.28);
+  --text-primary: #f6f3ff;
+  --text-secondary: #b9b2d1;
+  --text-muted: #8f87ab;
+  --accent: #9d6cff;
+  --accent-soft: rgba(157, 108, 255, 0.2);
+  --accent-strong: #bf96ff;
+  --ring: rgba(191, 150, 255, 0.7);
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #fb7185;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(157, 108, 255, 0.24), transparent 34%),
+    radial-gradient(circle at top right, rgba(83, 48, 188, 0.3), transparent 28%),
+    linear-gradient(180deg, #090b17 0%, #060712 48%, #05060f 100%);
+  color: var(--text-primary);
+  font-family: var(--font-body), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(157, 108, 255, 0.32);
+}
+
+.surface-grid {
+  position: relative;
+}
+
+.surface-grid::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  content: "";
+  mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent 92%);
+  pointer-events: none;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  box-shadow:
+    0 0 0 2px rgba(6, 7, 18, 0.8),
+    0 0 0 4px var(--ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+

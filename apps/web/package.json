@@ -7,10 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0",
+    "lint": "eslint src next-env.d.ts --max-warnings=0",
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@arcguard/core": "workspace:*",
+    "@arcguard/fixtures": "workspace:*",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-progress": "^1.1.8",
     "@radix-ui/react-separator": "^1.1.8",

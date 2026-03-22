@@ -12,19 +12,21 @@
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
-    "verify": "pnpm lint && pnpm typecheck && pnpm build",
+    "test": "pnpm --filter @arcguard/core test",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "analyze": "pnpm exec tsx scripts/analyze-scenario.ts",
     "report:scenario": "pnpm exec tsx scripts/generate-report.ts",
     "arcguard:analyze:flow": "pnpm exec tsx scripts/arcguard-flow.ts"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.4",
     "@types/node": "^25.5.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.1",
     "globals": "^17.4.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1"
+    "typescript-eslint": "^8.57.1",
+    "vitest": "^4.1.0"
   }
 }

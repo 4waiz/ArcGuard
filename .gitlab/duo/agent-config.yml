@@ -1,0 +1,18 @@
+image: node:24-bookworm
+setup_script:
+  - apt-get update && apt-get install -y git
+  - corepack enable
+  - pnpm config set store-dir .pnpm-store
+  - pnpm install --frozen-lockfile
+cache:
+  key:
+    files:
+      - pnpm-lock.yaml
+    prefix: arcguard-duo
+  paths:
+    - .pnpm-store
+network_policy:
+  include_recommended_allowed: true
+  allowed_domains:
+    - registry.npmjs.org
+

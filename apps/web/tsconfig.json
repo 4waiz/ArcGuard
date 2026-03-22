@@ -6,6 +6,7 @@
       "DOM.Iterable",
       "ES2022"
     ],
+    "baseUrl": ".",
     "jsx": "preserve",
     "plugins": [
       {
@@ -15,7 +16,12 @@
     "incremental": true,
     "types": [
       "node"
-    ]
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -27,4 +33,3 @@
     "node_modules"
   ]
 }
-
