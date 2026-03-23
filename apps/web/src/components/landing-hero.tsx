@@ -26,12 +26,12 @@ export function LandingHero() {
     <section className="page-shell relative overflow-hidden pb-10 sm:pb-12">
       <SiteHeader links={primaryLinks} ctaHref="/demo" ctaLabel="Open live demo" />
 
-      <div className="layout-container grid gap-8 pb-4 pt-10 sm:gap-10 sm:pt-12 lg:grid-cols-[minmax(0,0.98fr)_minmax(26rem,0.9fr)] lg:items-center lg:gap-10 lg:pt-14 xl:gap-12">
+      <div className="layout-container grid gap-8 pb-4 pt-10 sm:gap-10 sm:pt-12 lg:gap-10 lg:pt-14 xl:grid-cols-[minmax(0,0.98fr)_minmax(22rem,0.9fr)] xl:items-center xl:gap-12">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: "easeOut" }}
-          className="relative z-10 max-w-[39rem]"
+          className="relative z-10 min-w-0 max-w-[39rem]"
         >
           <Badge variant="accent" className="mb-4 sm:mb-5">
             GitLab Duo-native merge intelligence
@@ -42,10 +42,10 @@ export function LandingHero() {
               Deterministic review signals for teams shipping high-stakes changes
             </p>
 
-            <h1 className="text-balance font-[family-name:var(--font-display)] text-[clamp(3rem,6.6vw,5.6rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-white">
+            <h1 className="text-balance max-w-[10ch] font-[family-name:var(--font-display)] text-[clamp(2.8rem,6vw,5.2rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-white">
               Merge confidence for{" "}
               <span className="relative inline-block">
-                <span className="font-accent neon-line pl-1 text-[clamp(3.3rem,6.9vw,5.9rem)] text-white">
+                <span className="font-accent neon-line pl-1 text-[clamp(3.1rem,6.2vw,5.5rem)] text-white">
                   critical releases
                 </span>
                 <svg
@@ -89,7 +89,7 @@ export function LandingHero() {
           </div>
 
           <div className="section-shell mt-8 p-5 sm:mt-9 sm:p-6">
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] lg:items-center">
+            <div className="grid gap-5 xl:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] xl:items-center">
               <div className="space-y-3 pr-0 lg:pr-4">
                 <p className="text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">
                   Why teams adopt ArcGuard
@@ -119,9 +119,9 @@ export function LandingHero() {
           initial={{ opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.12 }}
-          className="relative mx-auto flex w-full max-w-[35rem] justify-center lg:ml-auto lg:mr-0 lg:max-w-[36rem] lg:justify-end xl:max-w-[38rem]"
+          className="relative mx-auto flex min-w-0 w-full max-w-[34rem] justify-center lg:max-w-[35rem] xl:ml-auto xl:mr-0 xl:max-w-[36rem] xl:justify-end"
         >
-          <div className="relative aspect-square w-full max-w-[36rem]">
+          <div className="relative aspect-square w-full max-w-[34rem] sm:max-w-[36rem]">
             <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle,rgba(87,227,174,0.18),transparent_58%)] blur-3xl" />
             <div className="absolute inset-[14%] rounded-full bg-[radial-gradient(circle,rgba(60,134,255,0.1),transparent_64%)] blur-3xl" />
 
@@ -150,7 +150,7 @@ export function LandingHero() {
             <div className="hero-ring absolute left-1/2 top-1/2 h-[72%] w-[32%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color:rgba(143,250,209,0.45)] [transform:translate(-50%,-50%)_rotate(65deg)]" />
             <div className="hero-ring absolute left-1/2 top-1/2 h-[82%] w-[28%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/18 [transform:translate(-50%,-50%)_rotate(24deg)]" />
 
-            <div className="section-shell absolute bottom-[8%] left-1/2 w-[min(21rem,88%)] -translate-x-1/2 p-4 sm:w-[min(22rem,86%)] sm:p-5">
+            <div className="section-shell absolute bottom-[9%] left-1/2 w-[min(20rem,88%)] -translate-x-1/2 p-4 sm:w-[min(21rem,84%)] sm:p-5">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
