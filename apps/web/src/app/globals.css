@@ -1,22 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #060712;
-  --background-glow: #1a1133;
-  --surface: rgba(16, 18, 35, 0.84);
-  --surface-strong: rgba(26, 28, 51, 0.92);
-  --surface-elevated: rgba(42, 28, 78, 0.9);
-  --border-strong: rgba(176, 148, 255, 0.28);
-  --text-primary: #f6f3ff;
-  --text-secondary: #b9b2d1;
-  --text-muted: #8f87ab;
-  --accent: #9d6cff;
-  --accent-soft: rgba(157, 108, 255, 0.2);
-  --accent-strong: #bf96ff;
-  --ring: rgba(191, 150, 255, 0.7);
-  --success: #34d399;
-  --warning: #fbbf24;
-  --danger: #fb7185;
+  --background: #030506;
+  --background-elevated: #071013;
+  --background-panel: rgba(8, 14, 16, 0.78);
+  --surface: rgba(8, 14, 16, 0.74);
+  --surface-strong: rgba(9, 17, 20, 0.9);
+  --surface-elevated: rgba(11, 24, 28, 0.96);
+  --surface-soft: rgba(255, 255, 255, 0.03);
+  --border-subtle: rgba(180, 222, 208, 0.1);
+  --border-strong: rgba(128, 214, 186, 0.22);
+  --text-primary: #f5f8f6;
+  --text-secondary: #acbbb5;
+  --text-muted: #6f8580;
+  --accent: #57e3ae;
+  --accent-soft: rgba(87, 227, 174, 0.14);
+  --accent-strong: #8ffad1;
+  --accent-deep: #12392f;
+  --ring: rgba(143, 250, 209, 0.6);
+  --success: #5fe1b4;
+  --warning: #f6c76b;
+  --danger: #f28b8b;
+  --hero-glow: rgba(72, 228, 179, 0.32);
+  --hero-glow-soft: rgba(53, 126, 255, 0.12);
 }
 
 * {
@@ -30,12 +36,36 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
   background:
-    radial-gradient(circle at top left, rgba(157, 108, 255, 0.24), transparent 34%),
-    radial-gradient(circle at top right, rgba(83, 48, 188, 0.3), transparent 28%),
-    linear-gradient(180deg, #090b17 0%, #060712 48%, #05060f 100%);
+    radial-gradient(circle at 15% 18%, rgba(37, 74, 92, 0.18), transparent 25%),
+    radial-gradient(circle at 82% 16%, rgba(34, 96, 72, 0.14), transparent 28%),
+    radial-gradient(circle at 50% 58%, rgba(21, 57, 51, 0.14), transparent 36%),
+    linear-gradient(180deg, #030506 0%, #040809 42%, #020404 100%);
   color: var(--text-primary);
   font-family: var(--font-body), sans-serif;
+}
+
+body::before,
+body::after {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 78% 22%, rgba(45, 223, 166, 0.08), transparent 0 18%),
+    radial-gradient(circle at 18% 2%, rgba(44, 101, 198, 0.08), transparent 0 24%);
+  filter: blur(18px);
+  opacity: 0.9;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  opacity: 0.95;
 }
 
 a {
@@ -51,7 +81,7 @@ textarea {
 }
 
 ::selection {
-  background: rgba(157, 108, 255, 0.32);
+  background: rgba(87, 227, 174, 0.3);
 }
 
 .surface-grid {
@@ -63,16 +93,96 @@ textarea {
   inset: 0;
   border-radius: inherit;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 44px 44px;
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
   content: "";
-  mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent 92%);
+  mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), transparent 85%);
+  opacity: 0.45;
   pointer-events: none;
+}
+
+.page-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-shell::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at top center, rgba(58, 128, 107, 0.08), transparent 26%),
+    radial-gradient(circle at 75% 20%, rgba(43, 91, 160, 0.08), transparent 22%);
+  content: "";
+  pointer-events: none;
+}
+
+.section-shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.012)),
+    var(--surface);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 30px 80px rgba(0, 0, 0, 0.28);
+}
+
+.section-shell::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at top right, rgba(87, 227, 174, 0.08), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(69, 124, 236, 0.06), transparent 25%);
+  content: "";
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.glass-pill {
+  border: 1px solid var(--border-subtle);
+  background: rgba(8, 12, 14, 0.72);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 22px 60px rgba(0, 0, 0, 0.22);
+}
+
+.neon-line {
+  position: relative;
+}
+
+.neon-line::after {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.35rem);
+  width: min(18rem, 100%);
+  height: 0.85rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at left, var(--accent-strong), transparent 70%);
+  filter: blur(10px);
+  opacity: 0.9;
+  content: "";
+}
+
+.font-accent {
+  font-family: var(--font-accent), serif;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.03em;
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
 }
 
 .focus-ring {
@@ -81,13 +191,81 @@ textarea {
 
 .focus-ring:focus-visible {
   box-shadow:
-    0 0 0 2px rgba(6, 7, 18, 0.8),
+    0 0 0 2px rgba(3, 5, 6, 0.92),
     0 0 0 4px var(--ring);
+}
+
+.hero-orb {
+  animation: hero-float 12s ease-in-out infinite;
+}
+
+.hero-orb::before,
+.hero-orb::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  content: "";
+}
+
+.hero-orb::before {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(242, 255, 248, 0.95) 0 8%, rgba(92, 230, 182, 0.52) 17%, rgba(92, 230, 182, 0.16) 34%, transparent 58%),
+    radial-gradient(circle at 50% 50%, rgba(67, 195, 255, 0.18), transparent 62%);
+  filter: blur(2px);
+}
+
+.hero-orb::after {
+  inset: 12%;
+  border: 1px solid rgba(224, 255, 244, 0.55);
+  box-shadow:
+    0 0 24px rgba(143, 250, 209, 0.22),
+    inset 0 0 28px rgba(255, 255, 255, 0.06);
+}
+
+.hero-ring {
+  animation: hero-spin 26s linear infinite;
+}
+
+.hero-wave {
+  animation: wave-shift 6s ease-in-out infinite alternate;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) scale(1.02);
+  }
+}
+
+@keyframes hero-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave-shift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(12px, -6px, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-}
 
+  .hero-orb,
+  .hero-ring,
+  .hero-wave {
+    animation: none;
+  }
+}

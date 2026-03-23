@@ -5,14 +5,14 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-full border text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 rounded-full border text-sm font-medium transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-[var(--accent)] px-5 py-2.5 text-white shadow-[0_0_28px_rgba(167,139,250,0.25)] hover:bg-[var(--accent-strong)]",
+          "border-[color:rgba(143,250,209,0.32)] bg-[var(--accent)] px-5 py-2.5 text-[#04110d] shadow-[0_0_28px_rgba(87,227,174,0.22)] hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] hover:shadow-[0_0_36px_rgba(87,227,174,0.28)]",
         secondary:
-          "border-[color:var(--border-strong)] bg-[var(--surface-strong)] px-5 py-2.5 text-[var(--text-primary)] hover:bg-[var(--surface-elevated)]",
+          "border-[color:var(--border-strong)] bg-[var(--surface-strong)] px-5 py-2.5 text-[var(--text-primary)] hover:-translate-y-0.5 hover:bg-[var(--surface-elevated)]",
         ghost:
           "border-transparent bg-transparent px-4 py-2 text-[var(--text-secondary)] hover:bg-white/5 hover:text-[var(--text-primary)]",
       },
@@ -49,4 +49,3 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
-

@@ -1,17 +1,24 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Sans } from "next/font/google";
+import { Cormorant_Garamond, Manrope, Sora } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "./globals.css";
 
-const displayFont = Space_Grotesk({
+const displayFont = Sora({
   subsets: ["latin"],
   variable: "--font-display",
 });
 
-const bodyFont = IBM_Plex_Sans({
+const bodyFont = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
+});
+
+const accentFont = Cormorant_Garamond({
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: ["500", "600", "700"],
+  variable: "--font-accent",
 });
 
 export const metadata: Metadata = {
@@ -33,7 +40,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${displayFont.variable} ${bodyFont.variable}`}>
+      <body
+        className={`${displayFont.variable} ${bodyFont.variable} ${accentFont.variable}`}
+      >
         <a
           href="#main-content"
           className="focus-ring absolute left-4 top-4 z-50 -translate-y-24 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white transition focus:translate-y-0 focus-visible:translate-y-0"

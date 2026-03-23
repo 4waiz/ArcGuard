@@ -125,7 +125,7 @@ function StageRail({
               completed
                 ? "border-emerald-400/20 bg-emerald-400/10"
                 : active
-                  ? "border-violet-300/30 bg-violet-400/10"
+                  ? "border-[color:var(--border-strong)] bg-[var(--accent-soft)]"
                   : "border-white/8 bg-white/4",
             )}
           >
@@ -136,7 +136,7 @@ function StageRail({
                   completed
                     ? "bg-emerald-300"
                     : active
-                      ? "bg-violet-300 shadow-[0_0_18px_rgba(191,150,255,0.8)]"
+                      ? "bg-[var(--accent-strong)] shadow-[0_0_18px_rgba(87,227,174,0.42)]"
                       : "bg-white/20",
                 )}
               />
@@ -207,12 +207,12 @@ export function ArcGuardDemo() {
   const isStale = report.input.id !== selectedScenario.id;
 
   const scoreBreakdown = [
-    { name: "Architecture", score: displayReport.architecture.score, fill: "#bf96ff" },
-    { name: "Review", score: displayReport.review.score, fill: "#7c5cff" },
-    { name: "Intent", score: displayReport.intent.score, fill: "#5eead4" },
+    { name: "Architecture", score: displayReport.architecture.score, fill: "#86f4cb" },
+    { name: "Review", score: displayReport.review.score, fill: "#3fcaa1" },
+    { name: "Intent", score: displayReport.intent.score, fill: "#6cecff" },
     { name: "Flake", score: displayReport.flake.score, fill: "#fbbf24" },
     { name: "Rollback", score: displayReport.rollback.score, fill: "#fb7185" },
-    { name: "CI Waste", score: displayReport.sustainability.score, fill: "#22c55e" },
+    { name: "CI Waste", score: displayReport.sustainability.score, fill: "#58dfb0" },
   ];
 
   const wasteChartData = displayReport.sustainability.hotspots.map((hotspot) => ({
@@ -243,7 +243,7 @@ export function ArcGuardDemo() {
           {...motionProps}
           className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"
         >
-          <Card className="overflow-hidden border-violet-300/15 bg-[linear-gradient(135deg,rgba(18,18,37,0.98),rgba(9,10,21,0.94))]">
+          <Card className="overflow-hidden border-[color:var(--border-strong)] bg-[linear-gradient(135deg,rgba(8,16,18,0.98),rgba(5,9,11,0.94))]">
             <CardHeader className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="space-y-2">
@@ -278,7 +278,7 @@ export function ArcGuardDemo() {
                     className={cn(
                       "focus-ring rounded-2xl border px-4 py-3 text-left transition",
                       selectedScenarioId === scenario.id
-                        ? "border-violet-300/40 bg-violet-400/12 shadow-[0_0_28px_rgba(157,108,255,0.2)]"
+                        ? "border-[color:var(--border-strong)] bg-[var(--accent-soft)] shadow-[0_0_28px_rgba(87,227,174,0.15)]"
                         : "border-white/8 bg-white/4 hover:border-white/15 hover:bg-white/7",
                     )}
                   >
@@ -303,7 +303,7 @@ export function ArcGuardDemo() {
                     Real deterministic scoring with staged reveal for demo pace.
                   </CardDescription>
                 </div>
-                <Bot className="h-5 w-5 text-violet-200" />
+                <Bot className="h-5 w-5 text-[var(--accent-strong)]" />
               </div>
             </CardHeader>
             <CardContent className="space-y-5">
@@ -416,8 +416,8 @@ export function ArcGuardDemo() {
                     Expand each evidence area to inspect the computed rationale.
                   </CardDescription>
                 </div>
-                <div className="rounded-[1.75rem] border border-violet-300/20 bg-violet-400/10 px-6 py-5 text-center shadow-[0_0_36px_rgba(157,108,255,0.22)]">
-                  <p className="text-xs uppercase tracking-[0.2em] text-violet-100/80">
+                <div className="rounded-[1.75rem] border border-[color:var(--border-strong)] bg-[var(--accent-soft)] px-6 py-5 text-center shadow-[0_0_36px_rgba(87,227,174,0.16)]">
+                  <p className="text-xs uppercase tracking-[0.2em] text-[color:rgba(143,250,209,0.8)]">
                     Confidence
                   </p>
                   <p className="mt-2 font-[family-name:var(--font-display)] text-5xl font-semibold">
@@ -530,7 +530,7 @@ export function ArcGuardDemo() {
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <FileStack className="h-5 w-5 text-violet-100" />
+                    <FileStack className="h-5 w-5 text-[var(--accent-strong)]" />
                     <div>
                       <CardTitle>Review Minimap</CardTitle>
                       <CardDescription>
@@ -576,7 +576,7 @@ export function ArcGuardDemo() {
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <CircuitBoard className="h-5 w-5 text-violet-100" />
+                    <CircuitBoard className="h-5 w-5 text-[var(--accent-strong)]" />
                     <div>
                       <CardTitle>Architecture Drift View</CardTitle>
                       <CardDescription>
@@ -677,7 +677,7 @@ export function ArcGuardDemo() {
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <ScrollText className="h-5 w-5 text-violet-100" />
+                    <ScrollText className="h-5 w-5 text-[var(--accent-strong)]" />
                     <div>
                       <CardTitle>Intent Contract View</CardTitle>
                       <CardDescription>
@@ -748,7 +748,7 @@ export function ArcGuardDemo() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <FlaskConical className="h-5 w-5 text-violet-100" />
+                <FlaskConical className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
                   <CardTitle>Flake Witness Capsule</CardTitle>
                   <CardDescription>
@@ -809,7 +809,7 @@ export function ArcGuardDemo() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <ArrowRightLeft className="h-5 w-5 text-violet-100" />
+                <ArrowRightLeft className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
                   <CardTitle>Rollback Reality Check</CardTitle>
                   <CardDescription>
@@ -870,7 +870,7 @@ export function ArcGuardDemo() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <Leaf className="h-5 w-5 text-violet-100" />
+                <Leaf className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
                   <CardTitle>Sustainability / CI Waste View</CardTitle>
                   <CardDescription>
@@ -1001,7 +1001,7 @@ export function ArcGuardDemo() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <GitMerge className="h-5 w-5 text-violet-100" />
+                <GitMerge className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
                   <CardTitle>Final Merge Confidence Verdict</CardTitle>
                   <CardDescription>
@@ -1022,7 +1022,7 @@ export function ArcGuardDemo() {
                       {displayReport.score}/100
                     </p>
                   </div>
-                  <Radar className="h-10 w-10 text-violet-200" />
+                  <Radar className="h-10 w-10 text-[var(--accent-strong)]" />
                 </div>
                 <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
                   {displayReport.keyFindings[0] ??
@@ -1041,7 +1041,7 @@ export function ArcGuardDemo() {
                 ))}
               </div>
 
-              <div className="rounded-3xl border border-violet-300/16 bg-violet-400/10 p-5">
+              <div className="rounded-3xl border border-[color:var(--border-strong)] bg-[var(--accent-soft)] p-5">
                 <div className="flex items-center gap-3">
                   {displayReport.verdict === "blocked" ? (
                     <ShieldAlert className="h-5 w-5 text-rose-100" />
