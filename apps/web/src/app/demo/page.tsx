@@ -12,18 +12,18 @@ const demoLinks = [
 
 export default function DemoPage() {
   return (
-    <main id="main-content" className="page-shell pb-20">
+    <main id="main-content" className="page-shell pb-14 sm:pb-16">
       <SiteHeader links={demoLinks} ctaHref="/" ctaLabel="Back to landing" />
 
-      <section className="px-6 pb-4 pt-16 sm:px-8 lg:px-12 lg:pt-20">
-        <div className="mx-auto max-w-7xl section-shell p-7 sm:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div className="max-w-3xl space-y-5">
+      <section className="layout-section-tight pt-8 sm:pt-10">
+        <div className="layout-container section-shell p-5 sm:p-6 lg:p-7">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div className="max-w-3xl space-y-4">
               <Badge variant="accent">Interactive merge intelligence</Badge>
-              <h1 className="font-[family-name:var(--font-display)] text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
+              <h1 className="max-w-2xl font-[family-name:var(--font-display)] text-[clamp(2.2rem,4vw,3.9rem)] font-semibold tracking-[-0.05em] text-white">
                 Scenario console for the real ArcGuard analysis engine.
               </h1>
-              <p className="text-lg leading-8 text-[var(--text-secondary)]">
+              <p className="max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8">
                 Switch between seeded merge requests, trigger the shared scoring
                 flow, and inspect the evidence layers behind each confidence verdict.
               </p>

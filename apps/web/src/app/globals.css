@@ -23,6 +23,7 @@
   --danger: #f28b8b;
   --hero-glow: rgba(72, 228, 179, 0.32);
   --hero-glow-soft: rgba(53, 126, 255, 0.12);
+  --layout-max: 1180px;
 }
 
 * {
@@ -116,6 +117,29 @@ textarea {
     radial-gradient(circle at 75% 20%, rgba(43, 91, 160, 0.08), transparent 22%);
   content: "";
   pointer-events: none;
+}
+
+.layout-container {
+  width: min(calc(100% - 2rem), var(--layout-max));
+  margin-inline: auto;
+}
+
+.layout-section {
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.layout-section-tight {
+  padding-block: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.panel-pad {
+  padding: clamp(1.25rem, 2vw, 2rem);
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .section-shell {
@@ -228,6 +252,18 @@ textarea {
 
 .hero-wave {
   animation: wave-shift 6s ease-in-out infinite alternate;
+}
+
+@media (min-width: 640px) {
+  .layout-container {
+    width: min(calc(100% - 2.75rem), var(--layout-max));
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-container {
+    width: min(calc(100% - 4rem), var(--layout-max));
+  }
 }
 
 @keyframes hero-float {

@@ -111,7 +111,7 @@ function StageRail({
   isRunning: boolean;
 }) {
   return (
-    <ol className="space-y-4">
+    <ol className="space-y-3">
       {report.timeline.map((item, index) => {
         const completed =
           stageIndex > index || (!isRunning && stageIndex >= report.timeline.length);
@@ -219,6 +219,26 @@ export function ArcGuardDemo() {
     name: hotspot.job,
     minutes: hotspot.minutes,
   }));
+  const hasWasteHotspots = wasteChartData.length > 0;
+  const maxWasteMinutes = Math.max(
+    1,
+    ...wasteChartData.map((item) => item.minutes),
+  );
+  const topWasteHotspots = wasteChartData.slice(0, 3);
+  const sustainabilityHighlights = [
+    {
+      label: "Green opportunity",
+      value: displayReport.sustainability.greenOpportunity,
+    },
+    {
+      label: "Avoidable share",
+      value: `${displayReport.sustainability.avoidablePercent}%`,
+    },
+    {
+      label: "Estimated waste",
+      value: `${displayReport.sustainability.estimatedWasteGrams}g`,
+    },
+  ];
 
   const analysisProgress = Math.round(
     (stageIndex / displayReport.timeline.length) * 100,
@@ -237,19 +257,21 @@ export function ArcGuardDemo() {
   };
 
   return (
-    <div className="px-6 pb-20 pt-8 sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-7xl space-y-8">
+    <div className="layout-container pb-12 pt-5 sm:pt-6">
+      <div className="space-y-6 lg:space-y-7">
         <motion.section
           {...motionProps}
-          className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"
+          className="grid gap-4 lg:grid-cols-[minmax(0,1.04fr)_minmax(20rem,0.96fr)] lg:items-stretch lg:gap-5"
         >
-          <Card className="overflow-hidden border-[color:var(--border-strong)] bg-[linear-gradient(135deg,rgba(8,16,18,0.98),rgba(5,9,11,0.94))]">
-            <CardHeader className="space-y-4">
+          <Card className="h-full overflow-hidden border-[color:var(--border-strong)] bg-[linear-gradient(135deg,rgba(8,16,18,0.98),rgba(5,9,11,0.94))]">
+            <CardHeader className="space-y-4 p-5 sm:p-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="space-y-2">
+                <div className="max-w-2xl space-y-2">
                   <Badge variant="accent">Interactive Merge Request Analysis</Badge>
-                  <CardTitle className="text-3xl">ArcGuard demo console</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-[1.9rem] sm:text-[2.1rem]">
+                    ArcGuard demo console
+                  </CardTitle>
+                  <CardDescription className="max-w-xl">
                     Switch between seeded merge requests, trigger the same analysis
                     engine used by the GitLab Duo flow, and inspect the resulting
                     Merge Confidence Report.
@@ -264,7 +286,7 @@ export function ArcGuardDemo() {
                 </Button>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 {seededScenarios.map((scenario) => (
                   <button
                     key={scenario.id}
@@ -276,7 +298,7 @@ export function ArcGuardDemo() {
                       })
                     }
                     className={cn(
-                      "focus-ring rounded-2xl border px-4 py-3 text-left transition",
+                      "focus-ring rounded-2xl border px-4 py-3.5 text-left transition",
                       selectedScenarioId === scenario.id
                         ? "border-[color:var(--border-strong)] bg-[var(--accent-soft)] shadow-[0_0_28px_rgba(87,227,174,0.15)]"
                         : "border-white/8 bg-white/4 hover:border-white/15 hover:bg-white/7",
@@ -294,8 +316,8 @@ export function ArcGuardDemo() {
             </CardHeader>
           </Card>
 
-          <Card className="border-white/10 bg-[linear-gradient(180deg,rgba(12,14,27,0.9),rgba(9,10,18,0.82))]">
-            <CardHeader>
+          <Card className="h-full border-white/10 bg-[linear-gradient(180deg,rgba(12,14,27,0.9),rgba(9,10,18,0.82))]">
+            <CardHeader className="p-5 pb-4 sm:p-6 sm:pb-4">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <CardTitle>Analysis timeline</CardTitle>
@@ -306,7 +328,7 @@ export function ArcGuardDemo() {
                 <Bot className="h-5 w-5 text-[var(--accent-strong)]" />
               </div>
             </CardHeader>
-            <CardContent className="space-y-5">
+            <CardContent className="flex h-full flex-col space-y-4 p-5 pt-0 sm:p-6 sm:pt-0">
               <div className="space-y-2" aria-live="polite">
                 <div className="flex items-center justify-between text-sm text-[var(--text-secondary)]">
                   <span>{isRunning ? `Running ${currentStageLabel}` : "Analysis ready"}</span>
@@ -324,10 +346,10 @@ export function ArcGuardDemo() {
         </motion.section>
         <motion.section
           {...motionProps}
-          className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]"
+          className="grid gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-5"
         >
-          <Card>
-            <CardHeader>
+          <Card className="h-full">
+            <CardHeader className="p-5 pb-4 sm:p-6 sm:pb-4">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <CardTitle>{selectedScenario.repository}</CardTitle>
@@ -344,8 +366,8 @@ export function ArcGuardDemo() {
                 </Badge>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid gap-4 sm:grid-cols-2">
+            <CardContent className="space-y-5 p-5 pt-0 sm:p-6 sm:pt-0">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {[
                   { label: "Author", value: selectedScenario.author },
                   {
@@ -382,7 +404,7 @@ export function ArcGuardDemo() {
                       key={file.path}
                       className="flex items-start justify-between gap-4 text-sm"
                     >
-                      <div>
+                      <div className="min-w-0">
                         <p className="font-medium text-[var(--text-primary)]">{file.path}</p>
                         <p className="mt-1 text-[var(--text-secondary)]">{file.summary}</p>
                       </div>
@@ -404,10 +426,10 @@ export function ArcGuardDemo() {
             </CardContent>
           </Card>
 
-          <Card className="overflow-hidden">
-            <CardHeader>
-              <div className="flex items-center justify-between gap-4">
-                <div>
+          <Card className="h-full overflow-hidden">
+            <CardHeader className="p-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="max-w-2xl">
                   <Badge variant={verdictVariant(displayReport.verdict)}>
                     {displayReport.verdictLabel}
                   </Badge>
@@ -416,17 +438,17 @@ export function ArcGuardDemo() {
                     Expand each evidence area to inspect the computed rationale.
                   </CardDescription>
                 </div>
-                <div className="rounded-[1.75rem] border border-[color:var(--border-strong)] bg-[var(--accent-soft)] px-6 py-5 text-center shadow-[0_0_36px_rgba(87,227,174,0.16)]">
+                <div className="w-full rounded-[1.5rem] border border-[color:var(--border-strong)] bg-[var(--accent-soft)] px-5 py-4 text-center shadow-[0_0_36px_rgba(87,227,174,0.16)] md:w-auto md:min-w-[9.5rem]">
                   <p className="text-xs uppercase tracking-[0.2em] text-[color:rgba(143,250,209,0.8)]">
                     Confidence
                   </p>
-                  <p className="mt-2 font-[family-name:var(--font-display)] text-5xl font-semibold">
+                  <p className="mt-2 font-[family-name:var(--font-display)] text-4xl font-semibold sm:text-5xl">
                     {displayReport.score}
                   </p>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-5 p-5 pt-0 sm:p-6 sm:pt-0">
               <div className="space-y-4">
                 <div className="grid gap-3 sm:hidden">
                   {scoreBreakdown.map((entry) => (
@@ -448,7 +470,7 @@ export function ArcGuardDemo() {
                     </div>
                   ))}
                 </div>
-                <div className="hidden h-72 rounded-[1.5rem] border border-white/8 bg-black/15 p-4 sm:block">
+                <div className="hidden h-64 rounded-[1.5rem] border border-white/8 bg-black/15 p-3 sm:block">
                   {chartsReady ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={scoreBreakdown}>
@@ -491,7 +513,7 @@ export function ArcGuardDemo() {
               <Accordion
                 type="single"
                 collapsible
-                className="rounded-3xl border border-white/8 bg-white/4 px-5"
+                className="rounded-3xl border border-white/8 bg-white/4 px-4 sm:px-5"
               >
                 {[
                   displayReport.architecture,
@@ -519,7 +541,7 @@ export function ArcGuardDemo() {
         </motion.section>
 
         <motion.section {...motionProps}>
-          <Tabs defaultValue="review" className="space-y-6">
+          <Tabs defaultValue="review" className="space-y-4">
             <TabsList>
               <TabsTrigger value="review">Review minimap</TabsTrigger>
               <TabsTrigger value="architecture">Architecture drift</TabsTrigger>
@@ -743,10 +765,10 @@ export function ArcGuardDemo() {
 
         <motion.section
           {...motionProps}
-          className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]"
+          className="grid gap-4 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:items-stretch lg:gap-5"
         >
-          <Card>
-            <CardHeader>
+          <Card className="h-full">
+            <CardHeader className="p-5 pb-4 sm:p-6 sm:pb-4">
               <div className="flex items-center gap-3">
                 <FlaskConical className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
@@ -757,7 +779,7 @@ export function ArcGuardDemo() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-5 pt-0 sm:p-6 sm:pt-0">
               {displayReport.flake.evidence.length > 0 ? (
                 displayReport.flake.evidence.map((evidence) => (
                   <div
@@ -806,8 +828,8 @@ export function ArcGuardDemo() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
+          <Card className="h-full">
+            <CardHeader className="p-5 pb-4 sm:p-6 sm:pb-4">
               <div className="flex items-center gap-3">
                 <ArrowRightLeft className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
@@ -819,7 +841,7 @@ export function ArcGuardDemo() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-5">
+            <CardContent className="space-y-4 p-5 pt-0 sm:p-6 sm:pt-0">
               <div className="flex items-center justify-between gap-4 rounded-3xl border border-white/8 bg-white/4 p-5">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-muted)]">
@@ -865,10 +887,10 @@ export function ArcGuardDemo() {
 
         <motion.section
           {...motionProps}
-          className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]"
+          className="grid gap-4 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-stretch lg:gap-5"
         >
-          <Card>
-            <CardHeader>
+          <Card className="h-full">
+            <CardHeader className="p-5 pb-4 sm:p-6 sm:pb-4">
               <div className="flex items-center gap-3">
                 <Leaf className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
@@ -880,8 +902,8 @@ export function ArcGuardDemo() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-5">
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <CardContent className="space-y-4 p-5 pt-0 sm:p-6 sm:pt-0">
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 {[
                   {
                     label: "Green opportunity",
@@ -920,9 +942,9 @@ export function ArcGuardDemo() {
                 of avoidable emissions.
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="grid gap-3 sm:hidden">
-                  {wasteChartData.length > 0 ? (
+                  {hasWasteHotspots ? (
                     wasteChartData.map((entry) => (
                       <div key={entry.name} className="rounded-2xl border border-white/8 bg-white/4 p-3">
                         <div className="mb-2 flex items-center justify-between gap-3">
@@ -940,10 +962,7 @@ export function ArcGuardDemo() {
                               width: `${Math.max(
                                 16,
                                 (entry.minutes /
-                                  Math.max(
-                                    1,
-                                    Math.max(...wasteChartData.map((item) => item.minutes)),
-                                  )) *
+                                  maxWasteMinutes) *
                                   100,
                               )}%`,
                             }}
@@ -957,49 +976,104 @@ export function ArcGuardDemo() {
                     </div>
                   )}
                 </div>
-                <div className="hidden h-72 rounded-[1.5rem] border border-white/8 bg-black/15 p-4 sm:block">
-                  {chartsReady ? (
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={wasteChartData}>
-                      <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
-                      <XAxis
-                        dataKey="name"
-                        stroke="rgba(185,178,209,0.7)"
-                        tickLine={false}
-                        axisLine={false}
-                        interval={0}
-                      />
-                      <YAxis
-                        stroke="rgba(185,178,209,0.7)"
-                        tickLine={false}
-                        axisLine={false}
-                      />
-                      <Tooltip
-                        cursor={{ fill: "rgba(255,255,255,0.04)" }}
-                        contentStyle={{
-                          borderRadius: 16,
-                          border: "1px solid rgba(255,255,255,0.12)",
-                          background: "rgba(10,11,21,0.96)",
-                          color: "#f6f3ff",
-                        }}
-                      />
-                      <Bar
-                        dataKey="minutes"
-                        radius={[10, 10, 0, 0]}
-                        fill="#22c55e"
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
-                  ) : (
-                    <div className="h-full rounded-[1.25rem] bg-white/4" />
-                  )}
+                <div className="hidden grid-cols-[minmax(0,1.05fr)_minmax(15rem,0.95fr)] gap-3 sm:grid">
+                  <div className="rounded-[1.5rem] border border-white/8 bg-black/15 p-3">
+                    {hasWasteHotspots && chartsReady ? (
+                      <div className="h-56">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={wasteChartData}>
+                            <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
+                            <XAxis
+                              dataKey="name"
+                              stroke="rgba(172,187,181,0.7)"
+                              tickLine={false}
+                              axisLine={false}
+                              interval={0}
+                            />
+                            <YAxis
+                              stroke="rgba(172,187,181,0.7)"
+                              tickLine={false}
+                              axisLine={false}
+                              width={28}
+                            />
+                            <Tooltip
+                              cursor={{ fill: "rgba(255,255,255,0.04)" }}
+                              contentStyle={{
+                                borderRadius: 16,
+                                border: "1px solid rgba(255,255,255,0.12)",
+                                background: "rgba(10,11,21,0.96)",
+                                color: "#f6f3ff",
+                              }}
+                            />
+                            <Bar
+                              dataKey="minutes"
+                              radius={[10, 10, 0, 0]}
+                              fill="#22c55e"
+                            />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    ) : (
+                      <div className="flex h-56 items-center justify-center rounded-[1.25rem] border border-white/8 bg-white/4 px-6 text-center text-sm leading-7 text-[var(--text-secondary)]">
+                        No avoidable CI hotspots surfaced for this scenario. The
+                        sustainability score is driven by the aggregate pipeline
+                        profile instead of a dominant single job.
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="grid gap-3">
+                    {hasWasteHotspots
+                      ? topWasteHotspots.map((entry) => (
+                          <div
+                            key={entry.name}
+                            className="rounded-[1.4rem] border border-white/8 bg-white/4 p-4"
+                          >
+                            <div className="flex items-center justify-between gap-3">
+                              <p className="text-sm font-medium text-[var(--text-primary)]">
+                                {entry.name}
+                              </p>
+                              <span className="text-sm text-[var(--text-secondary)]">
+                                {entry.minutes}m
+                              </span>
+                            </div>
+                            <div className="mt-3 h-2 rounded-full bg-white/8">
+                              <div
+                                className="h-2 rounded-full bg-emerald-400"
+                                style={{
+                                  width: `${Math.max(
+                                    16,
+                                    (entry.minutes / maxWasteMinutes) * 100,
+                                  )}%`,
+                                }}
+                              />
+                            </div>
+                          </div>
+                        ))
+                      : sustainabilityHighlights.map((entry) => (
+                          <div
+                            key={entry.label}
+                            className="rounded-[1.4rem] border border-white/8 bg-white/4 p-4"
+                          >
+                            <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                              {entry.label}
+                            </p>
+                            <p className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold text-white">
+                              {entry.value}
+                            </p>
+                            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                              Sustainability summary
+                            </p>
+                          </div>
+                        ))}
+                  </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
+          <Card className="h-full">
+            <CardHeader className="p-5 pb-4 sm:p-6 sm:pb-4">
               <div className="flex items-center gap-3">
                 <GitMerge className="h-5 w-5 text-[var(--accent-strong)]" />
                 <div>
@@ -1011,7 +1085,7 @@ export function ArcGuardDemo() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-5">
+            <CardContent className="flex h-full flex-col space-y-4 p-5 pt-0 sm:p-6 sm:pt-0">
               <div className="rounded-3xl border border-white/8 bg-white/4 p-5">
                 <div className="flex items-center justify-between gap-4">
                   <div>
@@ -1030,7 +1104,7 @@ export function ArcGuardDemo() {
                 </p>
               </div>
 
-              <div className="space-y-3">
+              <div className="grid gap-3">
                 {displayReport.keyFindings.map((finding) => (
                   <div
                     key={finding}
