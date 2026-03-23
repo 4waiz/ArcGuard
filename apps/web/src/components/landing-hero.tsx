@@ -150,7 +150,7 @@ export function LandingHero() {
             <div className="hero-ring absolute left-1/2 top-1/2 h-[72%] w-[32%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color:rgba(143,250,209,0.45)] [transform:translate(-50%,-50%)_rotate(65deg)]" />
             <div className="hero-ring absolute left-1/2 top-1/2 h-[82%] w-[28%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/18 [transform:translate(-50%,-50%)_rotate(24deg)]" />
 
-            <div className="section-shell absolute bottom-[9%] left-1/2 w-[min(20rem,88%)] -translate-x-1/2 p-4 sm:w-[min(21rem,84%)] sm:p-5">
+            <div className="section-shell absolute bottom-[12%] left-1/2 w-[min(20rem,88%)] -translate-x-1/2 p-4 sm:bottom-[13%] sm:w-[min(21rem,84%)] sm:p-5">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
