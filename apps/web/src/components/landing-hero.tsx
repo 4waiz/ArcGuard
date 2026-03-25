@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronRight, Play, Radar, Sparkles } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -13,12 +13,6 @@ const primaryLinks = [
   { href: "#signals", label: "Signals" },
   { href: "#workflow", label: "Workflow" },
   { href: "/demo", label: "Demo" },
-];
-
-const proofPoints = [
-  "GitLab Duo-native trigger and response flow",
-  "Deterministic scoring across six merge-risk lenses",
-  "Shared engine powers both the live demo and CI workflow",
 ];
 
 export function LandingHero() {
@@ -87,32 +81,6 @@ export function LandingHero() {
               </Link>
             </Button>
           </div>
-
-          <div className="section-shell mt-8 p-5 sm:mt-9 sm:p-6">
-            <div className="grid gap-5 xl:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] xl:items-center">
-              <div className="space-y-3 pr-0 lg:pr-4">
-                <p className="text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">
-                  Why teams adopt ArcGuard
-                </p>
-                <p className="max-w-sm text-pretty font-[family-name:var(--font-display)] text-[1.65rem] font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-[2rem]">
-                  A premium review surface for architecture drift, intent mismatch,
-                  flaky evidence, rollback risk, and CI waste.
-                </p>
-              </div>
-
-              <div className="grid gap-2.5 sm:gap-3">
-                {proofPoints.map((point) => (
-                  <div
-                    key={point}
-                    className="flex items-center justify-between gap-3 rounded-[1.35rem] border border-[var(--border-subtle)] bg-[var(--surface-soft)] px-4 py-3.5 text-sm leading-6 text-[var(--text-secondary)]"
-                  >
-                    <span>{point}</span>
-                    <ChevronRight className="h-4 w-4 shrink-0 text-[var(--accent)]" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         <motion.div
@@ -150,39 +118,6 @@ export function LandingHero() {
             <div className="hero-ring absolute left-1/2 top-1/2 h-[72%] w-[32%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color:rgba(143,250,209,0.45)] [transform:translate(-50%,-50%)_rotate(65deg)]" />
             <div className="hero-ring absolute left-1/2 top-1/2 h-[82%] w-[28%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/18 [transform:translate(-50%,-50%)_rotate(24deg)]" />
 
-            <div className="section-shell absolute bottom-[21%] left-1/2 w-[min(20rem,88%)] -translate-x-1/2 p-4 sm:bottom-[22%] sm:w-[min(21rem,84%)] sm:p-5">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                    Live preview
-                  </p>
-                  <p className="mt-1.5 font-[family-name:var(--font-display)] text-[1.45rem] font-semibold tracking-[-0.04em] text-white sm:text-[1.6rem]">
-                    Merge Confidence Report
-                  </p>
-                </div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--accent-soft)] text-[var(--accent-strong)] shadow-[0_0_24px_rgba(87,227,174,0.18)]">
-                  <Radar className="h-5 w-5" />
-                </div>
-              </div>
-
-              <div className="mt-4 grid gap-2.5 text-sm text-[var(--text-secondary)]">
-                <div className="flex items-center justify-between rounded-[1.1rem] border border-[var(--border-subtle)] bg-[var(--surface-soft)] px-3.5 py-3">
-                  <span>Architecture drift</span>
-                  <span className="text-[var(--danger)]">1 critical edge</span>
-                </div>
-                <div className="flex items-center justify-between rounded-[1.1rem] border border-[var(--border-subtle)] bg-[var(--surface-soft)] px-3.5 py-3">
-                  <span>Intent alignment</span>
-                  <span className="text-[var(--accent-strong)]">Computed evidence</span>
-                </div>
-                <div className="flex items-center justify-between rounded-[1.1rem] border border-[var(--border-subtle)] bg-[var(--surface-soft)] px-3.5 py-3">
-                  <span>Verdict</span>
-                  <span className="inline-flex items-center gap-2 text-white">
-                    <Sparkles className="h-4 w-4 text-[var(--accent)]" />
-                    Needs fixes
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
         </motion.div>
       </div>
